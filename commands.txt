@@ -1,0 +1,66 @@
+# DOCs https://docs.djangoproject.com/
+# DOCs for django_filters https://django-filter.readthedocs.io/en/stable/
+# DOCs for rest   https://www.django-rest-framework.org/api-guide/
+# DOCs for JWT https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+# DoCs for Swagger and Redoc https://drf-yasg.readthedocs.io/en/stable/readme.html
+# DOCs for Celery https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
+
+
+# create new app
+python manage.py startapp <app_name>
+
+# start app
+python manage.py runserver
+
+# apply migrations
+python manage.py migrate
+
+# create migrations
+python manage.py makemigrations
+
+# remove migrations
+python manage.py migrate <app_name> <number of migration 0001 (not include)>
+
+# admin page creator
+python manage.py createsuperuser
+
+#shell opener
+python manage.py shell
+
+# dumpdata
+# — команда для сохранения данных из текущей БД:
+python manage.py dumpdata <app_name> > <app_name>_data.json
+python -Xutf8 manage.py dumpdata <app.model> --indent 2 -o table.json
+# а при переносе всей базы с одного компа на другой
+./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes --indent 2 -o all_apps_unix.json
+
+
+
+# loaddata
+# — команда загрузки сохраненных данных в текущую БД:
+python manage.py loaddata <app_name>_data.json
+
+
+# database cleaner for pgadmin
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'north' -- your BD name
+  AND pid <> pg_backend_pid();
+
+# создать новую БД
+createdb -U postgres testdb (где postgres суперпользователь, testdb новая база данных)
+
+#example request with ordering and filtering
+http://localhost:8000/classes/payment/?ordering=-payment_date&payment_method=card
+
+# add JWT token
+must have in header    Authorisation = Bearer xxxxxxxxxxxxxxxx...
+
+# coverage for test in django
+coverage run --source='.' manage.py test
+
+# activate celery
+celery -A config worker -l INFO
+celery -A config beat -l INFO -S django
+#for Windows add -P eventlet key like "celery -A config -P eventlet worker -l INFO"
