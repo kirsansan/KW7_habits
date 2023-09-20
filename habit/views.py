@@ -24,6 +24,7 @@ class HabitPublicAPIView(ListAPIView):
             print("You are not allowed to public")
             return Habit.objects.filter(is_public=True)
 
+
 class HabitAPIView(ListAPIView):
     """Habit list-view """
     queryset = Habit.objects.all()
@@ -38,6 +39,7 @@ class HabitAPIView(ListAPIView):
             return Habit.objects.all()
         else:
             return Habit.objects.filter(creator=user)
+
 
 class HabitDetailAPIView(RetrieveAPIView):
     """Habit detail view"""
@@ -58,12 +60,11 @@ class HabitCreateAPIView(CreateAPIView):
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
-
     def perform_create(self, serializer):
         """save owner(creator) of Habit"""
-        new_Habit = serializer.save()
-        new_Habit.creator = self.request.user
-        new_Habit.save()
+        new_habit = serializer.save()
+        new_habit.creator = self.request.user
+        new_habit.save()
 
 
 class HabitUpdateAPIView(UpdateAPIView):
@@ -71,6 +72,3 @@ class HabitUpdateAPIView(UpdateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner | IsModerator | IsAdministrator]
-
-
-
