@@ -15,3 +15,6 @@ class UserFactory(factory.django.DjangoModelFactory):
     password = factory.Faker('password')
     telegram_username = factory.Faker('telegram_username')
 
+if __name__ == '__main__':
+    t = UserFactory()
+    print(t)
