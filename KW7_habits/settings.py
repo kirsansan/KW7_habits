@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
-from config.config import DB_PASSWORD, MY_EMAIL_PASSWORD, DJANGO_SECRET_KEY, MY_EMAIL_PORT, MY_EMAIL_HOST, MY_EMAIL, \
-    TXT_LOG, DB_BASE_NAME, DB_USER, DB_PORT, DB_HOST
+from config.config import DB_PASSWORD, DJANGO_SECRET_KEY, DB_BASE_NAME, DB_USER, DB_PORT, DB_HOST
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

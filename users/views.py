@@ -7,7 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from users.models import User
 
-from config.config import EMAIL_SENDING_SIMULATION_MODE
+# from config.config import EMAIL_SENDING_SIMULATION_MODE
 from users.permissions import IsOwner, IsAdmin
 from users.serializers import UserSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, \
     UserDetailSerializer, FullDetailSerializer

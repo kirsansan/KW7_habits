@@ -25,3 +25,27 @@ class Habit(models.Model):
         verbose_name = 'habit'
         verbose_name_plural = 'habits'
         ordering = ['pk']
+
+class SenderDailyLog(models.Model):
+    """Daily Log for sending
+       this table must be created every day """
+    SENT = 'SENT'
+    ERROR = 'ERROR'
+    CREATE = 'CREATE'
+
+    STATUS = (
+        (CREATE, 'create'),
+        (SENT, 'sent'),
+        (ERROR, 'sending error'),
+    )
+
+    habit_id = models.OneToOneField(Habit, default=1, verbose_name='habit id', on_delete=models.CASCADE, primary_key=True)
+    daily_status = models.CharField(max_length=6, choices=STATUS, default=CREATE, verbose_name='sending status')
+
+    def __str__(self):
+        return f"{self.habit} have status {self.is_send}"
+
+    class Meta:
+        verbose_name = 'log status'
+        verbose_name_plural = 'log statuses'
+        ordering = ['pk']

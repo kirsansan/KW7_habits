@@ -17,13 +17,12 @@ for take JWT token use POST
 http://127.0.0.1:8000/users/token/
 
 
-for create payment
-http://localhost:8000/classes/payment/create/ (POST method)
-with {"course_id": "XXX, "payment_method": "card"}
-API will return url for paying and pk 
-use this pk for checking status with command 
-http://localhost:8000/classes/payment/status/10/ (GET method)
-
-for handmade check whether payment successful use
-"python manage.py check_payments"
+- Log for tlg bot
++ Test tlg bot
+- auto scheduling
+- Tests 
+- Coverage
+- Manual documentation
+- Readme
+- Fine8
 
