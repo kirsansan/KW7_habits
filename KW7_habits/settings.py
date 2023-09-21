@@ -199,3 +199,15 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+
+# periodic tasks
+# CELERY_BEAT_SCHEDULE = {
+#     'cleaning_logs': {
+#         'task': 'habit.tasks.cleaning_logs',  # path to task
+#         'schedule': timedelta(hours=24),
+#     },
+#     'check_and_send_notes_telegram': {
+#         'task': 'habit.tasks.send_telegram_message_rev_b',  # path to task
+#         'schedule': timedelta(minutes=1),
+#     },
+# }
