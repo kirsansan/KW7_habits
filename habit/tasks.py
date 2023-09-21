@@ -22,6 +22,8 @@ import requests
 #         message = f"I remind you:at {habit.time} for {habit.title} you need to do {habit.action} in {habit.place}."
 #         telegram_bot.send_message(habit.creator.telegram_username, message)
 #
+
+
 @shared_task
 def send_telegram_message_rev_b():
     """Send telegram message via request.

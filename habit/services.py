@@ -16,7 +16,7 @@ def cleaning_logs():
         tmp = SenderDailyLog(habit_id=habit, daily_status=SenderDailyLog.CREATE)
         tmp.save()
 
-def send_telegram_message_rev_B():
+def send_telegram_message_rev_b():
     """Send telegram message via request
        you need make schedule to send in Admin panel """
     actual_habits_create = Habit.objects.filter(senderdailylog__daily_status=SenderDailyLog.CREATE)
@@ -40,6 +40,3 @@ def send_telegram_message_rev_B():
 
 
 
-# if __name__ == '__main__':
-#     #send_telegram_message_rev_B()
-#     cleaning_logs()
