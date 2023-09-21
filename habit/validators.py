@@ -18,7 +18,7 @@ class HabitActionTimeValidator:
 
 def habit_mass_validator(value):
     """Validate all fields in a given (w/o time_for_action)"""
-    print(value)
+    # print(value)
     if value.get('associated_habit') and value.get('reward'):  # both exist
         raise ValidationError('You must specify associated habit or reward. Not both at the same time')
     if value.get('associated_habit'):

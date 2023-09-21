@@ -17,6 +17,9 @@ for take JWT token use POST
 http://127.0.0.1:8000/users/token/
 
 
+celery -A KW7_habits beat -l INFO -S django 
+
+
 + log for tlg bot
 + Test tlg bot
 - auto scheduling

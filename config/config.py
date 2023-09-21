@@ -29,3 +29,4 @@ DJANGO_SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 
 MAX_PRODUCTS_PER_PAGE = 3
+LOG_FILE_NAME = "schedule_log2.log"

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from habit.models import Habit
+from habit.models import Habit, SenderDailyLog
 from habit.paginators import AllListsPaginator
 from habit.permissions import IsOwner, IsAdministrator, IsModerator
 from habit.serializers import HabitSerializer
@@ -65,6 +65,8 @@ class HabitCreateAPIView(CreateAPIView):
         new_habit = serializer.save()
         new_habit.creator = self.request.user
         new_habit.save()
+        new_log = SenderDailyLog(habit_id=new_habit, daily_status=SenderDailyLog.CREATE)
+        new_log.save()
 
 
 class HabitUpdateAPIView(UpdateAPIView):
