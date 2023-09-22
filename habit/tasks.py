@@ -2,8 +2,7 @@ import json
 import logging
 import os
 
-from celery import app
-from celery import shared_task
+from celery import app, shared_task
 from django.utils.timezone import now
 # from telebot import TeleBot-P eventlet
 
@@ -60,8 +59,8 @@ def send_telegram_message_rev_b():
         else:
             # print("the time has not yet come for", habit)
             logging.info(f"the time has not yet come for {habit}")
-
-
+#
+#
 @shared_task
 def cleaning_logs():
     """Cleaning daily logs
@@ -80,9 +79,10 @@ def printing_logs():
     # logger.info("logfile____:", logfile)
     # logging.basicConfig(level=logging.INFO, filename=logfile, filemode="w")
     # logging.info(f"PRIIIIIIIIIINTING LOG")
-    logger = logging.getLogger('celery')
-    logger.propagate = True
-    logger = logging.getLogger('celery.app.trace')
-    logger.propagate = True
-    logger.info("logger!!!")
+
+    # logger = logging.getLogger('celery')
+    # logger.propagate = True
+    # logger = logging.getLogger('celery.app.trace')
+    # logger.propagate = True
+    # logger.info("logger!!!")
     print("uweee")
