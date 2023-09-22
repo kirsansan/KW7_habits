@@ -5,7 +5,7 @@ import os
 from celery import app
 from celery import shared_task
 from django.utils.timezone import now
-from telebot import TeleBot
+# from telebot import TeleBot-P eventlet
 
 from KW7_habits import settings
 from config.config import TLG_TOKEN, TLG_CHAT_ID, LOG_FILE_NAME
