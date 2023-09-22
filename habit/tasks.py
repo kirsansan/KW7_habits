@@ -2,7 +2,8 @@ import json
 import logging
 import os
 
-from celery.app import task, shared_task
+from celery import app
+from celery import shared_task
 from django.utils.timezone import now
 from telebot import TeleBot
 
@@ -11,6 +12,10 @@ from config.config import TLG_TOKEN, TLG_CHAT_ID, LOG_FILE_NAME
 from habit.models import Habit, SenderDailyLog
 
 import requests
+
+from celery.utils.log import get_task_logger
+
+#logger = get_task_logger(__name__)
 
 
 #
@@ -37,7 +42,7 @@ def send_telegram_message_rev_b():
     actual_habits_create = Habit.objects.filter(senderdailylog__daily_status=SenderDailyLog.CREATE)
     logging.info(f"{actual_habits_create}")
     actual_habits = actual_habits_create.filter(creator__telegram_username__isnull=False)
-    logging.info(f"{actual_habits}")   # print(actual_habits)
+    logging.info(f"{actual_habits}")  # print(actual_habits)
     for habit in actual_habits:
         if habit.time <= now().time():
             print("I gonna send", habit, "to tlg_id", habit.creator.telegram_username)
@@ -53,7 +58,7 @@ def send_telegram_message_rev_b():
             # print("API response is:", response.status_code)
             logging.info(f"API response is: {response.status_code}")
         else:
-            #print("the time has not yet come for", habit)
+            # print("the time has not yet come for", habit)
             logging.info(f"the time has not yet come for {habit}")
 
 
@@ -66,3 +71,18 @@ def cleaning_logs():
     for habit in actual_habits:
         tmp = SenderDailyLog(habit_id=habit, daily_status=SenderDailyLog.CREATE)
         tmp.save()
+
+
+@shared_task
+def printing_logs():
+    # logfile = os.sep.join([str(settings.BASE_DIR), 'print.log'])
+    # print("logfile:", logfile)
+    # logger.info("logfile____:", logfile)
+    # logging.basicConfig(level=logging.INFO, filename=logfile, filemode="w")
+    # logging.info(f"PRIIIIIIIIIINTING LOG")
+    logger = logging.getLogger('celery')
+    logger.propagate = True
+    logger = logging.getLogger('celery.app.trace')
+    logger.propagate = True
+    logger.info("logger!!!")
+    print("uweee")

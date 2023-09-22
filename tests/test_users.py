@@ -5,7 +5,7 @@ from users.models import User
 
 
 @pytest.mark.django_db
-class TestUserAuthentication:
+class TestUserCreateAndAuth:
     def test_user_create(self):
         """Test user create"""
         client = Client()
@@ -14,9 +14,24 @@ class TestUserAuthentication:
             {'email': 'tompson@london.uk', 'password': '12345'},
             content_type='application/json',
         )
-        expected_response = {'id': 1, 'email': 'tompson@london.uk', 'last_name': ''}
+        expected_response = {'id': 1,
+                             'last_login': None,
+                             'is_superuser': False,
+                             'first_name': '',
+                             'is_staff': False,
+                             'is_active': True,
+                             'email': 'tompson@london.uk',
+                             'phone': None,
+                             'country': None,
+                             'avatar': None,
+                             'last_name': None,
+                             'telegram_username': None,
+                             'groups': [],
+                             'user_permissions': []}
         assert response.status_code == 201
-        #assert response.data == expected_response
+        response.data.pop('password')       # it doesn't matter
+        response.data.pop('date_joined')    # and it to
+        assert response.data == expected_response
 
 
 # @pytest.mark.django_db
