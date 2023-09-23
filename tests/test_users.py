@@ -43,92 +43,63 @@ class TestUserCreateAndAuth:
         assert response.status_code == 200
         assert response.data[0]['email'] == 'testuser@example.com'
 
-    def test_get_users_anonymous(self, client):
-        response = client.get(
-            '/users/'
-        )
-        assert response.status_code == 401
-        assert response.data['detail'] == 'Учетные данные не были предоставлены.'
+
 
 
 @pytest.mark.django_db
-class TestUserDetailUpdate:
+class TestUserDetail:
 
-    def test_get_one_user1(self, authenticated_user: dict):
+    def test_get_one_user(self, authenticated_user: dict):
         user = authenticated_user.get('user')
         client = authenticated_user.get('client')
 
         # Check retrieve (get)
         response = client.get(f'/users/{user.pk}/')
         assert response.status_code == 200
-        expected_response = {'id': user.pk}
-        print(response.data)
-        assert response.data == expected_response
-        # assert response.data['email'] == user.email
+        # expected_response = {'id': user.pk}
+        # print(response.data)
+        # assert response.data == expected_response
+        assert response.data['email'] == user.email
 
         # Check update (put)
-        new_user_data = {
-            'email': user.email,
-            'last_name': 'NEW lastname'
-        }
+        new_user_data = {'email': user.email,
+                         'last_name': 'NEW lastname'}
         response = client.put(f'/users/{user.pk}/',
                               data=new_user_data)
-        #print(response.data)
         assert response.status_code == 200
         assert response.data['last_name'] == 'NEW lastname'
 
         # Check update (put) with new email
-        new_user_data = {
-            'email': 'wrong@email.com',
-            'last_name': 'NEW lastname 2'
-        }
+        new_user_data = {'email': 'wrong@email.com',
+                         'last_name': 'NEW lastname 2'}
         response = client.put(f'/users/{user.pk}/',
                               data=new_user_data)
-        #print(response.data)
         assert response.status_code == 200
         assert response.data['email'] == 'wrong@email.com'
         assert response.data['last_name'] == 'NEW lastname 2'
 
 @pytest.mark.django_db
-class TestUserDetailUpdateAnonymous:
+class TestUserDetailUpdateDeleteAnonymous:
 
-    # def test_get_one_user(self, authenticated_user: dict):
-    #     user = authenticated_user.get('user')
-    #     client = authenticated_user.get('client')
-    #
-    #     # Check retrieve (get)
-    #     response = client.get(f'/users/{user.pk}/')
-    #     assert response.status_code == 200
-    #     expected_response = {}
-    #     assert response.data['email'] == user.email
-    #
-    #     # Check update (put)
-    #     new_user_data = {
-    #         'email': user.email,
-    #         'last_name': 'NEW lastname'
-    #     }
-    #     response = client.put(f'/users/{user.pk}/',
-    #                           data=new_user_data)
-    #     # print(response.data)
-    #     assert response.status_code == 200
-    #     assert response.data['last_name'] == 'NEW lastname'
-    #
-    #     # Check update (put) with new email
-    #     new_user_data = {
-    #         'email': 'wrong@email.com',
-    #         'last_name': 'NEW lastname 2'
-    #     }
-    #     response = client.put(f'/users/{user.pk}/',
-    #                           data=new_user_data)
-    #     # print(response.data)
-    #     assert response.status_code == 200
-    #     assert response.data['email'] == 'wrong@email.com'
-    #     assert response.data['last_name'] == 'NEW lastname 2'
-
-    def test_get_one_user_anonymous(self, user: dict):
-        client = Client()
+    def test_get_one_user_anonymous(self, client, user):
+        """Check that anonymous doesn't rigts for anything"""
         response = client.get(f'/users/{user.pk}/')
         assert response.status_code == 401
+        assert response.data['detail'] == 'Учетные данные не были предоставлены.'
+
+        new_user_data = {'email': 'wrong@email.com',
+                         'last_name': 'NEW lastname 2'}
+        response = client.put(f'/users/{user.pk}/', data=new_user_data)
+        assert response.status_code == 401
+        assert response.data['detail'] == 'Учетные данные не были предоставлены.'
+
+        response = client.delete(f'/users/{user.pk}/')
+        assert response.status_code == 401
+        assert response.data['detail'] == 'Учетные данные не были предоставлены.'
+
+        response = client.get(f'/users/')
+        assert response.status_code == 401
+        assert response.data['detail'] == 'Учетные данные не были предоставлены.'
 
 @pytest.mark.django_db
 class TestUserDetailWrongUpdate:
@@ -140,10 +111,8 @@ class TestUserDetailWrongUpdate:
         # Check update (put) with duplicate email
         new_user_data = {
             'email': user.email,        # try to put non-uniq email
-            'last_name': 'some lastname'
-        }
-        response = auth_client.put(f'/users/{auth_user.pk}/',
-                                    data=new_user_data)
+            'last_name': 'some lastname'}
+        response = auth_client.put(f'/users/{auth_user.pk}/', data=new_user_data)
 
         assert response.status_code == 400
         assert str(response.data['email']) == "[ErrorDetail(string='user с таким email уже существует.', code='unique')]"
