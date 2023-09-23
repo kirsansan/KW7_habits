@@ -3,7 +3,7 @@ import random
 from factory import Faker, SubFactory
 from factory.django import DjangoModelFactory
 
-from habit.models import Habit, SenderDailyLog
+from habit.models import Habit
 from users.models import User
 
 from datetime import time

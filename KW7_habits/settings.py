@@ -211,4 +211,8 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'habit.tasks.send_telegram_message_rev_b',  # path to task
         'schedule': timedelta(minutes=1),
     },
+    'check_and_fill_telegram_id': {
+        'task': 'habit.tasks.request_telegram_names',  # path to task
+        'schedule': timedelta(minutes=3),
+    },
 }
