@@ -16,7 +16,7 @@ class TestUserCreateAndAuth:
             {'email': 'tompson@london.uk', 'password': '12345'},
             content_type='application/json',
         )
-        expected_response = {'id': 1,
+        expected_response = {
                              'last_login': None,
                              'is_superuser': False,
                              'first_name': '',
@@ -33,6 +33,7 @@ class TestUserCreateAndAuth:
         assert response.status_code == 201
         response.data.pop('password')       # it doesn't matter
         response.data.pop('date_joined')    # and it to
+        response.data.pop('id')             # might be different with massive tests
         assert response.data == expected_response
 
     def test_get_users(self, client, token):

@@ -82,9 +82,11 @@ def test_create_habit(authenticated_user):
                 "frequency": 3,
                 "is_useful": False}
     response = auth_client.post(f'/habit/create/', new_data, format='json')
-    print(response.data)
+    assert response.status_code == 201
 
-    expected_response = {   "id": 1,
+    response.data.pop('id')
+
+    expected_response = {
                             "title": "push up",
                             "place": "home_sweet_home",
                             "time": "14:52:00",
@@ -97,5 +99,5 @@ def test_create_habit(authenticated_user):
                             "is_public": True,
                             "creator": auth_user.pk
                             }
-    assert response.status_code == 201
+
     assert response.data == expected_response
