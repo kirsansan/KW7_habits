@@ -8,6 +8,7 @@ from users.models import User
 
 from datetime import time
 
+
 class UserFactory(DjangoModelFactory):
     class Meta:
         model = User
@@ -33,5 +34,3 @@ class HabitFactory(DjangoModelFactory):
     frequency = Faker('pyint', min_value=1, max_value=7)
     is_public = True
     is_useful = True
-
-

@@ -8,7 +8,8 @@ class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = '__all__'
-        validators = [habit_mass_validator, HabitActionTimeValidator(field='time_for_action'), ]
+        validators = [habit_mass_validator,
+                      HabitActionTimeValidator(field='time_for_action'), ]
 
 
 class HabitPublicSerializer(serializers.ModelSerializer):

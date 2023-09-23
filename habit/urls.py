@@ -1,8 +1,7 @@
 from django.urls import path
-from rest_framework import routers
-
 from habit.apps import HabitConfig
-from habit.views import HabitAPIView, HabitCreateAPIView, HabitDetailAPIView, HabitUpdateAPIView, HabitDeleteAPIView, \
+from habit.views import HabitAPIView, HabitCreateAPIView, \
+    HabitDetailAPIView, HabitUpdateAPIView, HabitDeleteAPIView, \
     HabitPublicAPIView
 
 app_name = HabitConfig.name
@@ -18,8 +17,3 @@ urlpatterns = [
     path('detail/<int:pk>/', HabitDetailAPIView.as_view(), name='detail'),
 
 ]
-
-# router = routers.SimpleRouter()
-# router.register('course', CourseViewSet)
-#
-# urlpatterns += router.urls

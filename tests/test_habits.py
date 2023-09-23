@@ -1,8 +1,4 @@
-import json
 import pytest
-
-from django.conf import settings
-
 from config.config import MAX_PRODUCTS_PER_PAGE
 from habit.models import Habit, SenderDailyLog
 from tests.factories import HabitFactory
@@ -83,9 +79,7 @@ def test_create_habit(authenticated_user):
                 "is_useful": False}
     response = auth_client.post(f'/habit/create/', new_data, format='json')
     assert response.status_code == 201
-
     response.data.pop('id')
-
     expected_response = {
                             "title": "push up",
                             "place": "home_sweet_home",
@@ -99,5 +93,17 @@ def test_create_habit(authenticated_user):
                             "is_public": True,
                             "creator": auth_user.pk
                             }
-
     assert response.data == expected_response
+
+@pytest.mark.django_db
+def test_delete_habit(authenticated_user):
+    auth_client = authenticated_user.get('client')
+    auth_user = authenticated_user.get('user')
+    habit = HabitFactory(creator=auth_user)
+
+    response = auth_client.delete(f'/habit/delete/{habit.pk}/')
+    assert response.status_code == 204
+
+    # Check that the habit was deleted from the database
+    with pytest.raises(Habit.DoesNotExist):
+        habit.refresh_from_db()

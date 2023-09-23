@@ -57,8 +57,13 @@ http://localhost:8000/classes/payment/?ordering=-payment_date&payment_method=car
 # add JWT token
 must have in header    Authorisation = Bearer xxxxxxxxxxxxxxxx...
 
-# coverage for test in django
+# coverage for Unittest in django
 coverage run --source='.' manage.py test
+
+#coverage for pytest
+pip install pytest-cov
+pytest --cov
+
 
 # activate celery
 celery -A config worker -l INFO

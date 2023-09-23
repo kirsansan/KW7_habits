@@ -12,12 +12,10 @@ from habit.models import Habit, SenderDailyLog
 
 import requests
 
-from celery.utils.log import get_task_logger
+# from celery.utils.log import get_task_logger
+# logger = get_task_logger(__name__)
 
-#logger = get_task_logger(__name__)
-
-
-#
+#       Example working messaging via telebot
 # @task
 # def send_telegram_message(habit_pk):
 #     """Send message via Telebot
@@ -27,7 +25,7 @@ from celery.utils.log import get_task_logger
 #         telegram_bot = TeleBot(TLG_TOKEN)
 #         message = f"I remind you:at {habit.time} for {habit.title} you need to do {habit.action} in {habit.place}."
 #         telegram_bot.send_message(habit.creator.telegram_username, message)
-#
+
 
 
 @shared_task
@@ -46,8 +44,10 @@ def send_telegram_message_rev_b():
         if habit.time <= now().time():
             print("I gonna send", habit, "to tlg_id", habit.creator.telegram_username)
             logging.info(f"I gonna send {habit} to tlg_id {habit.creator.telegram_username}")
-            message = f"I remind you:at {habit.time} for {habit.title} you need to do {habit.action} in {habit.place}."
-            url = f"https://api.telegram.org/bot{TLG_TOKEN}/sendMessage?chat_id={habit.creator.telegram_username}&text={message}"
+            message = f"I remind you:at {habit.time} for {habit.title} " \
+                      f"you need to do {habit.action} in {habit.place}."
+            url = f"https://api.telegram.org/bot{TLG_TOKEN}/sendMessage" \
+                  f"?chat_id={habit.creator.telegram_username}&text={message}"
             response = requests.get(url)
             if response.status_code == 200:
                 # content = json.loads(response.text)
@@ -68,21 +68,12 @@ def cleaning_logs():
     SenderDailyLog.objects.all().delete()
     actual_habits = Habit.objects.all()
     for habit in actual_habits:
-        tmp = SenderDailyLog(habit_id=habit, daily_status=SenderDailyLog.CREATE)
+        tmp = SenderDailyLog(habit_id=habit,
+                             daily_status=SenderDailyLog.CREATE)
         tmp.save()
 
 
 @shared_task
 def printing_logs():
-    # logfile = os.sep.join([str(settings.BASE_DIR), 'print.log'])
-    # print("logfile:", logfile)
-    # logger.info("logfile____:", logfile)
-    # logging.basicConfig(level=logging.INFO, filename=logfile, filemode="w")
-    # logging.info(f"PRIIIIIIIIIINTING LOG")
-
-    # logger = logging.getLogger('celery')
-    # logger.propagate = True
-    # logger = logging.getLogger('celery.app.trace')
-    # logger.propagate = True
-    # logger.info("logger!!!")
-    print("uweee")
+    """ Tiny task for juzz up celery log """
+    print("uweee =)")

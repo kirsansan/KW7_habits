@@ -66,12 +66,20 @@ def authenticated_user():
     return {'client': client, 'user': user, 'password': password}
 
 
-#
-#
-# @pytest.fixture
-# def client():
-#     client = APIClient()
-#     return client
+
+
+@pytest.fixture
+def base_habit():
+    new_data = {"title": "TITLE",
+                "place": "home_sweet_home",
+                "time": "12:52:00",
+                "action": "swim to the test",
+                "associated_habit": None,
+                "time_for_action": "0:01:14",
+                "frequency": 3,
+                "is_useful": False,
+                "is_public": False}
+    return new_data
 
 
 # @pytest.fixture(autouse=True)

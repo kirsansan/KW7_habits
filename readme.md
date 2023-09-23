@@ -22,10 +22,11 @@ celery -A KW7_habits beat -l INFO -S django
 
 + log for tlg bot
 + Test tlg bot
-- auto scheduling
++ auto scheduling
 - Tests 
 - Coverage
 - Manual documentation
 - Readme
 - Fine8
+- TLGID from bot 
 
