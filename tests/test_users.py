@@ -47,7 +47,7 @@ class TestUserCreateAndAuth:
 
 
 @pytest.mark.django_db
-class TestUserDetail:
+class TestUserDetailUpdate:
 
     def test_get_one_user(self, authenticated_user: dict):
         user = authenticated_user.get('user')
@@ -81,7 +81,7 @@ class TestUserDetail:
 @pytest.mark.django_db
 class TestUserDetailUpdateDeleteAnonymous:
 
-    def test_get_one_user_anonymous(self, client, user):
+    def test_user_anonymous(self, client, user):
         """Check that anonymous doesn't rigts for anything"""
         response = client.get(f'/users/{user.pk}/')
         assert response.status_code == 401
@@ -120,6 +120,34 @@ class TestUserDetailWrongUpdate:
         # Check update someone else's user information
         response = auth_client.put(f'/users/{user.pk}/',
                                    data=new_user_data)
+        assert response.status_code == 403
+        assert str(response.data['detail']) == "You might see only self-information"
+
+@pytest.mark.django_db
+class TestOtherUserInfo:
+
+    def test_other_user_detail(self, authenticated_user: dict, user):
+        auth_user = authenticated_user.get('user')
+        auth_client = authenticated_user.get('client')
+
+
+        # Check retrieve (get)
+        response = auth_client.get(f'/users/{user.pk}/')
+        expected_response = {'pk': user.pk,
+                             'email': user.email,
+                             'phone': str(user.phone),
+                             'country': user.country,
+                             'avatar': None,
+                             'last_name': user.last_name,
+                             'telegram_username': str(user.telegram_username)}
+        assert response.status_code == 200
+        assert response.data == expected_response
+
+        # Check update (put) with duplicate email and for other user the same time
+        new_user_data = {
+            'email': auth_user.email,        # try to put for other user
+            'last_name': 'some lastname'}
+        response = auth_client.put(f'/users/{user.pk}/', data=new_user_data)
         assert response.status_code == 403
         assert str(response.data['detail']) == "You might see only self-information"
 
