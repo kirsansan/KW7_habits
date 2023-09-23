@@ -1,4 +1,3 @@
-
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -41,13 +40,11 @@ class UserViewSet(ModelViewSet):
         # print("action=", self.action)
         # print("kwargs=", self.kwargs.get('pk'))
         # print("user", self.request.user.pk)
-        if not self.request.user.is_anonymous:
-            is_himself = int(self.request.user.pk) == int(self.kwargs.get('pk'))
-        else:
-            is_himself = False
         i_wanna_be_serializer = self.serializers.get(self.action, self.default_serializer_class)
-        if self.action == "retrieve" and (is_himself or self.request.user.is_superuser):
-            i_wanna_be_serializer = FullDetailSerializer
+        if self.action == "retrieve":
+            if not self.request.user.is_anonymous:
+                if int(self.request.user.pk) == int(self.kwargs.get('pk')) or self.request.user.is_superuser:
+                    i_wanna_be_serializer = FullDetailSerializer
         return i_wanna_be_serializer
 
 

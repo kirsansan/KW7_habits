@@ -1,7 +1,9 @@
 import pytest
 from pytest_factoryboy import register
-
-from tests.factories import UserFactory
+from django.test import Client
+from rest_framework.test import APIClient
+from tests.factories import UserFactory, HabitFactory
+from users.models import User
 
 # Factories
 
@@ -21,23 +23,49 @@ def token(client, django_user_model):
     )
 
     response = client.post(
-        "/user/token/",
+        "/users/token/",
         {"email": email, "password": password},
         format='json'
     )
 
     return response.data["access"]
 
-# import pytest
-# from model_bakery import baker
-# from rest_framework.test import APIClient
-#
-#
-# @pytest.fixture
-# def user():
-#     user = baker.make_recipe('users.user')
-#     user.set_password("password123")
-#     return user
+
+# def token_for_user(my_client: Client, my_user):
+#     """Returns access token for my_user"""
+#     print("UWEEE:", my_user.email)
+#     www_user = User.objects.get(pk=my_user.pk)
+#     print("www_user:", www_user, "password", my_user.password)
+#     response = my_client.post(
+#         "/users/token/",
+#         {"email": my_user.email, "password": my_user.password},
+#         format='json'
+#     )
+#     print("response:", response.status_code)
+#     return response.data["access"]
+
+
+@pytest.fixture
+def user():
+    user = UserFactory()
+    user.set_password("12345")
+    return user
+
+
+@pytest.fixture
+@pytest.mark.django_db
+def authenticated_user():
+    user = UserFactory.create()
+    password = user.password
+    user.set_password(password)
+    user.save()
+    # create_instances_for_user(user)
+    client = APIClient()
+    #client.login(email=user.email, password=password)
+    client.force_authenticate(user=user)
+    return {'client': client, 'user': user, 'password': password}
+
+
 #
 #
 # @pytest.fixture
@@ -50,3 +78,8 @@ def token(client, django_user_model):
 # def reset_db_before_test():
 #     # Вызывает db.reset_db() перед каждым тестом
 #     db.reset_db()
+
+@pytest.fixture
+def random_habit():
+    habit = HabitFactory()
+    return habit

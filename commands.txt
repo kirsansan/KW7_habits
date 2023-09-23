@@ -65,3 +65,4 @@ celery -A config worker -l INFO
 celery -A config beat -l INFO -S django
 #for Windows add -P eventlet key like "celery -A config -P eventlet worker -l INFO"
 celery worker --app=app.app --pool=eventlet --loglevel=INFO
+celery --app=KW7_habits worker --loglevel=INFO --scheduler=django --pool=eventlet
