@@ -19,7 +19,8 @@ class Habit(models.Model):
     is_public = models.BooleanField(default=True, verbose_name='is public flag')
 
     def __str__(self):
-        return f'{self.action} at {self.time} in {self.place} for {self.time_for_action}'
+        return f'{self.action} at {self.time} in {self.place} for {self.time_for_action} ' \
+               f'pub:{"Y" if self.is_public else "N"} usf:{"Y" if self.is_useful else "N"}'
 
     class Meta:
         verbose_name = 'habit'

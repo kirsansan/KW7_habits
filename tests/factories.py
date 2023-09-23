@@ -27,11 +27,11 @@ class HabitFactory(DjangoModelFactory):
     time_for_action = time(00, random.randint(0, 1), random.randint(0, 59))
     creator = SubFactory(UserFactory)
     title = Faker('word')
-    place = Faker('word')
+    place = Faker('city')
     time = Faker('time')
     action = Faker('word')
     frequency = Faker('pyint', min_value=1, max_value=7)
-    is_public = bool(random.choice([True, False]))
-    is_useful = bool(random.choice([True, False]))
+    is_public = True
+    is_useful = True
 
 
