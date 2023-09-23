@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('password',)
+        fields = ('pk', 'email', 'phone', 'country', 'avatar', 'last_name', 'telegram_username')
 
 
 class FullDetailSerializer(serializers.ModelSerializer):

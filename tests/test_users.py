@@ -54,15 +54,17 @@ class TestUserCreateAndAuth:
 @pytest.mark.django_db
 class TestUserDetailUpdate:
 
-    def test_get_one_user(self, authenticated_user: dict):
+    def test_get_one_user1(self, authenticated_user: dict):
         user = authenticated_user.get('user')
         client = authenticated_user.get('client')
 
         # Check retrieve (get)
         response = client.get(f'/users/{user.pk}/')
         assert response.status_code == 200
-        expected_response = {}
-        assert response.data['email'] == user.email
+        expected_response = {'id': user.pk}
+        print(response.data)
+        assert response.data == expected_response
+        # assert response.data['email'] == user.email
 
         # Check update (put)
         new_user_data = {
@@ -88,40 +90,40 @@ class TestUserDetailUpdate:
         assert response.data['last_name'] == 'NEW lastname 2'
 
 @pytest.mark.django_db
-class TestUserDetailUpdate:
+class TestUserDetailUpdateAnonymous:
 
-    def test_get_one_user(self, authenticated_user: dict):
-        user = authenticated_user.get('user')
-        client = authenticated_user.get('client')
-
-        # Check retrieve (get)
-        response = client.get(f'/users/{user.pk}/')
-        assert response.status_code == 200
-        expected_response = {}
-        assert response.data['email'] == user.email
-
-        # Check update (put)
-        new_user_data = {
-            'email': user.email,
-            'last_name': 'NEW lastname'
-        }
-        response = client.put(f'/users/{user.pk}/',
-                              data=new_user_data)
-        # print(response.data)
-        assert response.status_code == 200
-        assert response.data['last_name'] == 'NEW lastname'
-
-        # Check update (put) with new email
-        new_user_data = {
-            'email': 'wrong@email.com',
-            'last_name': 'NEW lastname 2'
-        }
-        response = client.put(f'/users/{user.pk}/',
-                              data=new_user_data)
-        # print(response.data)
-        assert response.status_code == 200
-        assert response.data['email'] == 'wrong@email.com'
-        assert response.data['last_name'] == 'NEW lastname 2'
+    # def test_get_one_user(self, authenticated_user: dict):
+    #     user = authenticated_user.get('user')
+    #     client = authenticated_user.get('client')
+    #
+    #     # Check retrieve (get)
+    #     response = client.get(f'/users/{user.pk}/')
+    #     assert response.status_code == 200
+    #     expected_response = {}
+    #     assert response.data['email'] == user.email
+    #
+    #     # Check update (put)
+    #     new_user_data = {
+    #         'email': user.email,
+    #         'last_name': 'NEW lastname'
+    #     }
+    #     response = client.put(f'/users/{user.pk}/',
+    #                           data=new_user_data)
+    #     # print(response.data)
+    #     assert response.status_code == 200
+    #     assert response.data['last_name'] == 'NEW lastname'
+    #
+    #     # Check update (put) with new email
+    #     new_user_data = {
+    #         'email': 'wrong@email.com',
+    #         'last_name': 'NEW lastname 2'
+    #     }
+    #     response = client.put(f'/users/{user.pk}/',
+    #                           data=new_user_data)
+    #     # print(response.data)
+    #     assert response.status_code == 200
+    #     assert response.data['email'] == 'wrong@email.com'
+    #     assert response.data['last_name'] == 'NEW lastname 2'
 
     def test_get_one_user_anonymous(self, user: dict):
         client = Client()
@@ -129,7 +131,7 @@ class TestUserDetailUpdate:
         assert response.status_code == 401
 
 @pytest.mark.django_db
-class TestUserDetailUpdate:
+class TestUserDetailWrongUpdate:
 
     def test_get_one_user(self, authenticated_user: dict, user):
         auth_user = authenticated_user.get('user')
