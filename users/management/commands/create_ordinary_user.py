@@ -3,9 +3,8 @@ Create ordinary user without specific rights
 """
 
 from django.core.management import BaseCommand
-
-from dz24_django_DRF import settings
 from users.models import User
+
 
 class Command(BaseCommand):
 

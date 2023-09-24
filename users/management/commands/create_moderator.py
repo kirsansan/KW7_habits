@@ -4,12 +4,9 @@ with a few specific custom access
 """
 
 from django.core.management import BaseCommand
-
-from dz24_django_DRF import settings
-# from main.models import Client
 from users.models import User
-from django.contrib.auth.models import Group, Permission
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Group
+
 
 class Command(BaseCommand):
 
@@ -35,5 +32,3 @@ class Command(BaseCommand):
         # group.permissions.add(permission2)
 
         group.user_set.add(user)
-
-

@@ -71,3 +71,6 @@ celery -A config beat -l INFO -S django
 #for Windows add -P eventlet key like "celery -A config -P eventlet worker -l INFO"
 celery worker --app=KW7_habits --pool=eventlet --loglevel=INFO
 celery --app=KW7_habits worker --loglevel=INFO --scheduler=django --pool=eventlet
+
+# flake8 command
+flake8 --max-line-length=120 --exclude=migrations,venv,venvunix

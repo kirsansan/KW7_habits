@@ -1,9 +1,6 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
-
-from KW7_habits import settings
 from rest_framework.viewsets import ModelViewSet
-
 from users.models import User
 
 # from config.config import EMAIL_SENDING_SIMULATION_MODE

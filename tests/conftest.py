@@ -1,9 +1,7 @@
 import pytest
 from pytest_factoryboy import register
-from django.test import Client
 from rest_framework.test import APIClient
 from tests.factories import UserFactory, HabitFactory
-from users.models import User
 
 # Factories
 
@@ -61,11 +59,9 @@ def authenticated_user():
     user.save()
     # create_instances_for_user(user)
     client = APIClient()
-    #client.login(email=user.email, password=password)
+    # client.login(email=user.email, password=password)
     client.force_authenticate(user=user)
     return {'client': client, 'user': user, 'password': password}
-
-
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
 import pytest
 from config.config import MAX_PRODUCTS_PER_PAGE
-from habit.models import Habit, SenderDailyLog
+from habit.models import Habit
 from tests.factories import HabitFactory
 from users.models import User
 
@@ -13,12 +13,13 @@ def test_get_habit_list(authenticated_user):
     assert response.status_code == 200
     assert len(response.data['results']) == MAX_PRODUCTS_PER_PAGE
 
+
 @pytest.mark.django_db
 def test_get_habit_list_as_creator(authenticated_user):
     auth_client = authenticated_user.get('client')
     auth_user: User = authenticated_user.get('user')
     habits = HabitFactory.create_batch(2)  # two default
-    for habit in habits:        # make both habits like as we are a creator of them
+    for habit in habits:  # make both habits like as we are a creator of them
         habit.creator = auth_user
         habit.is_public = False
         habit.save()
@@ -32,6 +33,7 @@ def test_get_habit_list_as_creator(authenticated_user):
     response = auth_client.get('/habit/my/')
     assert response.status_code == 200
     assert len(response.data['results']) == 2
+
 
 @pytest.mark.django_db
 def test_get_habit_detail(authenticated_user):
@@ -64,6 +66,7 @@ def test_get_habit_detail(authenticated_user):
     assert response.status_code == 200
     assert response.data == expected_response
 
+
 @pytest.mark.django_db
 def test_create_habit(authenticated_user):
     auth_client = authenticated_user.get('client')
@@ -77,23 +80,24 @@ def test_create_habit(authenticated_user):
                 "time_for_action": "0:1:25",
                 "frequency": 3,
                 "is_useful": False}
-    response = auth_client.post(f'/habit/create/', new_data, format='json')
+    response = auth_client.post('/habit/create/', new_data, format='json')
     assert response.status_code == 201
     response.data.pop('id')
     expected_response = {
-                            "title": "push up",
-                            "place": "home_sweet_home",
-                            "time": "14:52:00",
-                            "action": "jazz up",
-                            "is_useful": False,
-                            "associated_habit": None,
-                            "time_for_action": "00:01:25",
-                            "frequency": 3,
-                            "reward": None,
-                            "is_public": True,
-                            "creator": auth_user.pk
-                            }
+        "title": "push up",
+        "place": "home_sweet_home",
+        "time": "14:52:00",
+        "action": "jazz up",
+        "is_useful": False,
+        "associated_habit": None,
+        "time_for_action": "00:01:25",
+        "frequency": 3,
+        "reward": None,
+        "is_public": True,
+        "creator": auth_user.pk
+    }
     assert response.data == expected_response
+
 
 @pytest.mark.django_db
 def test_delete_habit(authenticated_user):

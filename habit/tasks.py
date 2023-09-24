@@ -1,8 +1,7 @@
-import json
 import logging
 import os
 
-from celery import app, shared_task
+from celery import shared_task
 from django.utils.timezone import now
 # from telebot import TeleBot-P eventlet
 
@@ -28,7 +27,6 @@ from users.models import User
 #         telegram_bot = TeleBot(TLG_TOKEN)
 #         message = f"I remind you:at {habit.time} for {habit.title} you need to do {habit.action} in {habit.place}."
 #         telegram_bot.send_message(habit.creator.telegram_username, message)
-
 
 
 @shared_task
@@ -61,6 +59,8 @@ def send_telegram_message_rev_b():
         else:
             # print("the time has not yet come for", habit)
             logging.info(f"the time has not yet come for {habit}")
+
+
 #
 #
 @shared_task
@@ -79,6 +79,7 @@ def cleaning_logs():
 def printing_logs():
     """ Tiny task for juzz up celery log """
     print("uweee =)")
+
 
 @shared_task
 def request_telegram_names():

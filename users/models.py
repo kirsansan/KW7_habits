@@ -24,14 +24,13 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return f"""{self.email} 
-                    aka {self.last_name if self.last_name else 'Unknown'} 
-                    with tlg: {self.telegram_username if self.telegram_username else 'Unknown_tlg'}"""
+        return f"{self.email} \
+                    aka {self.last_name if self.last_name else 'Unknown'} \
+                    with tlg: {self.telegram_username if self.telegram_username else 'Unknown_tlg'}"
 
     # @property
     # def username(self):
     #     return self.user.email
-
 
     class Meta:
         verbose_name = 'user'
