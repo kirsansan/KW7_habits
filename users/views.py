@@ -13,6 +13,13 @@ from users.serializers import UserSerializer, UserCreateSerializer, MyTokenObtai
 
 
 class UserViewSet(ModelViewSet):
+    """all users procedures
+       there you can
+       - create
+       - update
+       - delete
+       - get information (for all users list and extended information about yourself)
+       """
     queryset = User.objects.all()
     default_serializer_class = UserSerializer
     serializers = {
