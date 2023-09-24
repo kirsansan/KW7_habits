@@ -23,7 +23,6 @@ DB_HOST = os.getenv('POSTGRES_HOST')
 #     EMAIL_SENDING_SIMULATION_MODE = True
 
 TLG_TOKEN = os.getenv('TLG_TOKEN')
-TLG_CHAT_ID = os.getenv('TLG_CHAT_ID')
 
 DJANGO_SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 

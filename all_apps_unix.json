@@ -1,0 +1,662 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2023-09-22T13:10:16.048Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "logggg: каждые 60 секунды",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2023-09-22T13:16:16.706Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "logggg: каждые 60 секунды",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Task (registered)\"]}}]"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "aiw9mzlv0xuc8m7qbc9qnj20lpigw6tu",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAZph1w6d4zkIGhUjU0Ke3KeHfbpAvdvvf-f6vA61LC2vIcRlEXZdTpl0VOz1x3IQ-u90mnqS7zGPWe6MM2fZskv65H-3dQuJVtbZMgoDfcWSZxzrFJQx7O2AtYS-AdOoPiM0HfOdooUPYQCYHIG1KfL8UVNnc:1qj2Db:mUFu96FAI0QEYpk7UuITPXxPi6vFqnMOhbbZwJKHeeU",
+    "expire_date": "2023-10-04T18:46:35.394Z"
+  }
+},
+{
+  "model": "django_celery_beat.intervalschedule",
+  "pk": 1,
+  "fields": {
+    "every": 86400,
+    "period": "seconds"
+  }
+},
+{
+  "model": "django_celery_beat.intervalschedule",
+  "pk": 2,
+  "fields": {
+    "every": 60,
+    "period": "seconds"
+  }
+},
+{
+  "model": "django_celery_beat.intervalschedule",
+  "pk": 3,
+  "fields": {
+    "every": 180,
+    "period": "seconds"
+  }
+},
+{
+  "model": "django_celery_beat.crontabschedule",
+  "pk": 1,
+  "fields": {
+    "minute": "0",
+    "hour": "4",
+    "day_of_week": "*",
+    "day_of_month": "*",
+    "month_of_year": "*",
+    "timezone": "UTC"
+  }
+},
+{
+  "model": "django_celery_beat.periodictasks",
+  "pk": 1,
+  "fields": {
+    "last_update": "2023-09-23T22:53:09.211Z"
+  }
+},
+{
+  "model": "django_celery_beat.periodictask",
+  "pk": 1,
+  "fields": {
+    "name": "celery.backend_cleanup",
+    "task": "celery.backend_cleanup",
+    "interval": null,
+    "crontab": 1,
+    "solar": null,
+    "clocked": null,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "headers": "{}",
+    "priority": null,
+    "expires": null,
+    "expire_seconds": 43200,
+    "one_off": false,
+    "start_time": null,
+    "enabled": true,
+    "last_run_at": null,
+    "total_run_count": 0,
+    "date_changed": "2023-09-23T22:53:09.134Z",
+    "description": ""
+  }
+},
+{
+  "model": "django_celery_beat.periodictask",
+  "pk": 2,
+  "fields": {
+    "name": "cleaning_logs",
+    "task": "habit.tasks.cleaning_logs",
+    "interval": 1,
+    "crontab": null,
+    "solar": null,
+    "clocked": null,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "headers": "{}",
+    "priority": null,
+    "expires": null,
+    "expire_seconds": null,
+    "one_off": false,
+    "start_time": null,
+    "enabled": true,
+    "last_run_at": null,
+    "total_run_count": 0,
+    "date_changed": "2023-09-23T22:53:09.195Z",
+    "description": ""
+  }
+},
+{
+  "model": "django_celery_beat.periodictask",
+  "pk": 3,
+  "fields": {
+    "name": "check_and_send_notes_telegram",
+    "task": "habit.tasks.send_telegram_message_rev_b",
+    "interval": 2,
+    "crontab": null,
+    "solar": null,
+    "clocked": null,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "headers": "{}",
+    "priority": null,
+    "expires": null,
+    "expire_seconds": null,
+    "one_off": false,
+    "start_time": null,
+    "enabled": true,
+    "last_run_at": "2023-09-23T23:53:14.465Z",
+    "total_run_count": 986,
+    "date_changed": "2023-09-23T23:53:19.232Z",
+    "description": ""
+  }
+},
+{
+  "model": "django_celery_beat.periodictask",
+  "pk": 4,
+  "fields": {
+    "name": "logggg",
+    "task": "habit.tasks.printing_logs",
+    "interval": 2,
+    "crontab": null,
+    "solar": null,
+    "clocked": null,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "headers": "{}",
+    "priority": null,
+    "expires": null,
+    "expire_seconds": null,
+    "one_off": false,
+    "start_time": null,
+    "enabled": true,
+    "last_run_at": "2023-09-23T23:52:18.942Z",
+    "total_run_count": 436,
+    "date_changed": "2023-09-23T23:53:19.175Z",
+    "description": ""
+  }
+},
+{
+  "model": "django_celery_beat.periodictask",
+  "pk": 5,
+  "fields": {
+    "name": "check_and_fill_telegram_id",
+    "task": "habit.tasks.request_telegram_names",
+    "interval": 3,
+    "crontab": null,
+    "solar": null,
+    "clocked": null,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "headers": "{}",
+    "priority": null,
+    "expires": null,
+    "expire_seconds": null,
+    "one_off": false,
+    "start_time": null,
+    "enabled": true,
+    "last_run_at": "2023-09-23T23:53:10.823Z",
+    "total_run_count": 20,
+    "date_changed": "2023-09-23T23:53:19.120Z",
+    "description": ""
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Ri0QIYiF2E8Q9XJ4NYpxT6$EjXLupQvxFxLU66VXWn3Lf+xZ0Qica98/UgGPpz/rlU=",
+    "last_login": "2023-09-20T18:46:35.391Z",
+    "is_superuser": true,
+    "first_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-09-20T18:46:29.248Z",
+    "email": "admin@example.com",
+    "phone": null,
+    "country": null,
+    "avatar": "",
+    "last_name": "admin",
+    "telegram_username": "",
+    "telegram_chat_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$norw7CS0ujHHjWDvtD5s9O$c8wsfj7eOxCBJgC9S6HKOMlDVVtykWjbnXh2iepI+Gk=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-09-20T18:52:51.131Z",
+    "email": "justuser@example.com",
+    "phone": null,
+    "country": null,
+    "avatar": "",
+    "last_name": "brbrb",
+    "telegram_username": "215382993",
+    "telegram_chat_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$rEtV5x4KrKYPlwAC7ZRr0K$7qe04eBb7UeNLD2ANzrlnbmLdNDlZncl4wJOIUP2GEQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-09-23T22:36:55.546Z",
+    "email": "marta@example.com",
+    "phone": null,
+    "country": null,
+    "avatar": "",
+    "last_name": "brbrb",
+    "telegram_username": "marta_wo_age",
+    "telegram_chat_id": "211512971",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 1,
+  "fields": {
+    "creator": null,
+    "title": "virgin1",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": true,
+    "associated_habit": null,
+    "frequency": 1,
+    "reward": null,
+    "time_for_action": null,
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 3,
+  "fields": {
+    "creator": 2,
+    "title": "virgin3",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": true,
+    "associated_habit": null,
+    "frequency": 1,
+    "reward": "chocolate",
+    "time_for_action": null,
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 4,
+  "fields": {
+    "creator": 2,
+    "title": "virgin4",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": true,
+    "associated_habit": null,
+    "frequency": 1,
+    "reward": "chocolate",
+    "time_for_action": null,
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 5,
+  "fields": {
+    "creator": 2,
+    "title": "virgin5",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": true,
+    "associated_habit": null,
+    "frequency": 1,
+    "reward": "chocolate",
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 6,
+  "fields": {
+    "creator": 2,
+    "title": "virgin6",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": true,
+    "associated_habit": null,
+    "frequency": 1,
+    "reward": "chocolate",
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 7,
+  "fields": {
+    "creator": 2,
+    "title": "nonUseful",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": false,
+    "associated_habit": null,
+    "frequency": 1,
+    "reward": null,
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 8,
+  "fields": {
+    "creator": 2,
+    "title": "virgin_hz5",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 5,
+    "reward": null,
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 9,
+  "fields": {
+    "creator": 2,
+    "title": "virgin_hz5",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 5,
+    "reward": null,
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 10,
+  "fields": {
+    "creator": 2,
+    "title": "virgin_hz5",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 5,
+    "reward": null,
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 11,
+  "fields": {
+    "creator": 2,
+    "title": "virgin_hz5",
+    "place": "home",
+    "time": "12:21:00",
+    "action": "push-ups",
+    "is_useful": true,
+    "associated_habit": 4,
+    "frequency": 5,
+    "reward": null,
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 12,
+  "fields": {
+    "creator": 2,
+    "title": "virgin_hz5",
+    "place": "home",
+    "time": "06:21:00",
+    "action": "push-ups",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 5,
+    "reward": null,
+    "time_for_action": "00:01:45",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 17,
+  "fields": {
+    "creator": 2,
+    "title": "tlgtest",
+    "place": "home_sweet_home",
+    "time": "10:21:00",
+    "action": "jazz up",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 3,
+    "reward": null,
+    "time_for_action": "00:01:25",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 18,
+  "fields": {
+    "creator": 2,
+    "title": "tlgtest2",
+    "place": "home_sweet_home",
+    "time": "10:21:00",
+    "action": "jazz up",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 3,
+    "reward": null,
+    "time_for_action": "00:01:25",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 19,
+  "fields": {
+    "creator": 2,
+    "title": "tlgtest2",
+    "place": "home_sweet_home",
+    "time": "04:21:00",
+    "action": "jazz up",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 3,
+    "reward": null,
+    "time_for_action": "00:01:25",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 20,
+  "fields": {
+    "creator": 2,
+    "title": "tlgtest2",
+    "place": "home_sweet_home",
+    "time": "14:52:00",
+    "action": "jazz up",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 3,
+    "reward": null,
+    "time_for_action": "00:01:25",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.habit",
+  "pk": 21,
+  "fields": {
+    "creator": 3,
+    "title": "tlgtest2",
+    "place": "home_sweet_home",
+    "time": "14:52:00",
+    "action": "jazz up",
+    "is_useful": false,
+    "associated_habit": 4,
+    "frequency": 3,
+    "reward": null,
+    "time_for_action": "00:01:25",
+    "is_public": true
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 1,
+  "fields": {
+    "daily_status": "CREATE"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 3,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 4,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 5,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 6,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 7,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 8,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 9,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 10,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 11,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 12,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 18,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 19,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 20,
+  "fields": {
+    "daily_status": "SENT"
+  }
+},
+{
+  "model": "habit.senderdailylog",
+  "pk": 21,
+  "fields": {
+    "daily_status": "SENT"
+  }
+}
+]
