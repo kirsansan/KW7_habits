@@ -110,5 +110,14 @@ To run the tests, ensure that you have pytest installed in your virtual environm
 Next, navigate to the root directory of your project and execute: pytest
 
 
+For create docker image use:
+build docker image
+>docker build -t habit-app .
+
+for run container execute:
+>docker run habit-app
+
+
+
 Have a nice day! See you!
 with best wishes, kirill.s

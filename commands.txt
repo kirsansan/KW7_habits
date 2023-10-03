@@ -78,6 +78,11 @@ flake8 --max-line-length=120 --exclude=migrations,venv,venvunix
 
 # DOCKER
 
+#links
+https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
+https://docs.docker.com/network/drivers/bridge/
+https://saasitive.com/tutorial/django-celery-redis-postgres-docker-compose/
+
 # build docker image
 docker build -t my-python-app .
 
