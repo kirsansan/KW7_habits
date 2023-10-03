@@ -74,3 +74,31 @@ celery --app=KW7_habits worker --loglevel=INFO --scheduler=django --pool=eventle
 
 # flake8 command
 flake8 --max-line-length=120 --exclude=migrations,venv,venvunix
+
+
+# DOCKER
+
+# build docker image
+docker build -t my-python-app .
+
+# run container
+docker run my-python-app
+
+# list of images
+sudo docker images
+
+# all containers (with stopped)
+sudo docker ps -a
+
+# clear all stopped containers
+docker container prune
+
+# run with console
+docker run -it busybox
+
+# tests images
+docker run -it --rm -d -p 8000:80 --name web nginx
+docker run helloword
+
+# rights for docker
+sudo usermod -aG docker <username>
