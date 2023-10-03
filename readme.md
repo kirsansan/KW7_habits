@@ -114,7 +114,7 @@ For create docker image use:
 build docker image
 >docker build -t habit-app .
 
-for run container execute:
+for run container execute (pay attention now it works on port 8002):
 >docker run habit-app
 
 
