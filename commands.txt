@@ -42,6 +42,8 @@ python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttype
 python manage.py loaddata <app_name>_data.json
 
 
+# DARABASE
+
 # database cleaner for pgadmin
 SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
@@ -50,6 +52,12 @@ WHERE pg_stat_activity.datname = 'north' -- your BD name
 
 # создать новую БД
 createdb -U postgres testdb (где postgres суперпользователь, testdb новая база данных)
+
+# switch to postgree user
+sudo -i -u postgres
+
+
+# ORM
 
 #example request with ordering and filtering
 http://localhost:8000/classes/payment/?ordering=-payment_date&payment_method=card
