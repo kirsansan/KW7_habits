@@ -96,6 +96,9 @@ sudo docker images
 # all containers (with stopped)
 sudo docker ps -a
 
+#run command in the container
+docker exec -it <container_id> <command>
+
 # clear all stopped containers
 docker container prune
 
@@ -108,3 +111,8 @@ docker run helloword
 
 # rights for docker
 sudo usermod -aG docker <username>
+
+
+# work with docker-compose
+docker-compose build
+docker-compose up

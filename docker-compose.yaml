@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: dockerfile
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    ports:
+      - "8001:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+
+
+  migrations:
+    build: .
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: python manage.py migrate
+
+  postgres:
+    image: postgres:14.8-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_BASE}
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_BASE}
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
