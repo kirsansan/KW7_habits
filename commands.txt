@@ -42,7 +42,7 @@ python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttype
 python manage.py loaddata <app_name>_data.json
 
 
-# DARABASE
+# DAТABASE
 
 # database cleaner for pgadmin
 SELECT pg_terminate_backend(pg_stat_activity.pid)
