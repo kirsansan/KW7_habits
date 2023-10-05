@@ -118,6 +118,11 @@ for run container execute (pay attention now it works on port 8002):
 >docker run habit-app
 
 
+if you want to use docker-compose run the following commands:
+>docker-compose build;
+docker-compose up
+
+
 
 Have a nice day! See you!
 with best wishes, kirill.s

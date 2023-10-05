@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 from config.config import DB_PASSWORD, DJANGO_SECRET_KEY, \
-    DB_BASE_NAME, DB_USER, DB_PORT, DB_HOST
+    DB_BASE_NAME, DB_USER, DB_PORT, DB_HOST, LOCATION_REDIS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -164,7 +164,7 @@ if CACHE_ENABLED:
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": "redis://127.0.0.1:6379",
+            "LOCATION": f"redis://{LOCATION_REDIS}:6379",
             "TIMEOUT": 30
         }
     }
@@ -197,8 +197,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CORS_ALLOW_ALL_ORIGINS = False
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = f'redis://{LOCATION_REDIS}:6379/0'
+CELERY_RESULT_BACKEND = f'redis://{LOCATION_REDIS}:6379/0'
 
 # periodic tasks
 CELERY_BEAT_SCHEDULE = {

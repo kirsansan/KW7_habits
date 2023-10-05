@@ -26,6 +26,8 @@ TLG_TOKEN = os.getenv('TLG_TOKEN')
 
 DJANGO_SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
+LOCATION_REDIS = os.getenv('LOCATION_REDIS')
+
 
 MAX_PRODUCTS_PER_PAGE = 3
 LOG_FILE_NAME = "schedule_log2.log"

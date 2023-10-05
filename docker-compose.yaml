@@ -16,6 +16,28 @@ services:
       - "8001:8000"
     command: python manage.py runserver 0.0.0.0:8000
 
+  celery:
+    build:
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      redis:
+        condition: service_started
+      api:
+        condition: service_started
+    command: celery -A KW7_habits worker -l INFO
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      redis:
+        condition: service_started
+      api:
+        condition: service_started
+    command: celery -A KW7_habits beat -l INFO -S django
+
 
   migrations:
     build: .
@@ -41,6 +63,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    command: redis-server
+    restart: always
 
 volumes:
   postgres_data:
