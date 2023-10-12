@@ -28,6 +28,8 @@ DJANGO_SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 LOCATION_REDIS = os.getenv('LOCATION_REDIS')
 
+ENV_TYPE = os.getenv('ENV_TYPE')
+
 
 MAX_PRODUCTS_PER_PAGE = 3
 LOG_FILE_NAME = "schedule_log2.log"
