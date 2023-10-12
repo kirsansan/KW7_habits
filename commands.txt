@@ -90,6 +90,7 @@ flake8 --max-line-length=120 --exclude=migrations,venv,venvunix
 https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
 https://docs.docker.com/network/drivers/bridge/
 https://saasitive.com/tutorial/django-celery-redis-postgres-docker-compose/
+https://ru.stackoverflow.com/questions/1496878/%D0%9A%D0%B0%D0%BA-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA-postgres-%D0%B8%D0%B7-%D0%B4%D0%BE%D0%BA%D0%B5%D1%80-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0
 
 # build docker image
 docker build -t my-python-app .
