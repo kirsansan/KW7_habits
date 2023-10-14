@@ -95,12 +95,16 @@ DATABASES = {
         'NAME': DB_BASE_NAME,  # DB name
         # 'USER': 'postgres',  # default user
         'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,  # password for default user (get from .env )
+        # 'PASSWORD': DB_PASSWORD,  # password for default user (get from .env )
         # 'HOST': '172.22.48.1',  # ip for unix domain socket
         'HOST': DB_HOST,
         'PORT': DB_PORT,  # port for DB
     }
 }
+
+if ENV_TYPE == 'local' or ENV_TYPE == 'external': # else - will not be determinate
+    DATABASES['default']['PASSWORD'] = DB_PASSWORD
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
