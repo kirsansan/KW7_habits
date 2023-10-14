@@ -1,6 +1,6 @@
-python3 -m venv venv  # already created of deploy stage
+python3 -m venv venv  # is it must already created at deploy stage?
 source ./venv/bin/activate
-pip3 install -r requirements.txt # already created of deploy stage
+pip3 install -r requirements.txt # is it already created at deploy stage?
 echo "=========================== user is"
 whoami
 echo "==========================="
