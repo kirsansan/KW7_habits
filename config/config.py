@@ -5,11 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
-DB_USER = os.getenv('POSTGRES_USER')
-DB_PORT = int(os.getenv('POSTGRES_PORT'))
-DB_BASE_NAME = os.getenv('POSTGRES_BASE')
-DB_HOST = os.getenv('POSTGRES_HOST')
+
 
 
 # for future in case of notices via e-mail
@@ -30,6 +26,18 @@ LOCATION_REDIS = os.getenv('LOCATION_REDIS')
 
 ENV_TYPE = os.getenv('ENV_TYPE')
 
+if ENV_TYPE == 'local':
+    DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+    DB_USER = os.getenv('POSTGRES_USER')
+    DB_PORT = int(os.getenv('POSTGRES_PORT'))
+    DB_BASE_NAME = os.getenv('POSTGRES_BASE')
+    DB_HOST = 'localhost'
+else:
+    DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+    DB_USER = os.getenv('POSTGRES_USER')
+    DB_PORT = int(os.getenv('POSTGRES_PORT'))
+    DB_BASE_NAME = os.getenv('POSTGRES_BASE')
+    DB_HOST = os.getenv('POSTGRES_HOST')
 
 MAX_PRODUCTS_PER_PAGE = 3
 LOG_FILE_NAME = "schedule_log2.log"

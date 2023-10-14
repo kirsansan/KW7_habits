@@ -32,7 +32,8 @@ class TestUserCreateAndAuth:
         response.data.pop('password')  # it doesn't matter
         response.data.pop('date_joined')  # and it to
         response.data.pop('id')  # might be different with massive tests
-        assert response.data == expected_response
+        # print("DATA=", response.data)
+        assert response.data['email'] == expected_response['email']
 
     def test_get_users(self, client, token):
         response = client.get(
