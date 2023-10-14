@@ -1,11 +1,22 @@
 stages:
     - deploy
+    - tests
 
 Deploy to stage:
     stage: deploy
     script:
         - cp $ENV_STAGE .env
         - bash deploy.sh
+    only:
+        - master
+    tags:
+        - prod
+
+Tests to stage:
+    stage: tests
+    script:
+        - cp $ENV_STAGE .env
+        - bash deploy_and_test.sh
     only:
         - master
     tags:

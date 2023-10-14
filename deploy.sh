@@ -1,5 +1,5 @@
-python3 -m venv venv
+# python3 -m venv venv  # already created of deploy stage
 source ./venv/bin/activate
-pip3 install -r requirements.txt
-python3 manage.py migrate
+# pip3 install -r requirements.txt # already created of deploy stage
+pytest
 deactivate
